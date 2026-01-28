@@ -9,12 +9,12 @@ namespace SignInWorkoutYavin.Service
 {
     public class DBSQLiteService : IDBService
     {
-        public void AddUser(AppUser user)
+        public void AddUser(User user)
         {
             throw new NotImplementedException();
         }
 
-        public AppUser GetUserByEmail(string uEmail)
+        public User GetUserByEmail(string uEmail)
         {
             throw new NotImplementedException();
         }
@@ -24,12 +24,12 @@ namespace SignInWorkoutYavin.Service
             throw new NotImplementedException();
         }
 
-        public void RemoveUser(AppUser user)
+        public void RemoveUser(User user)
         {
             throw new NotImplementedException();
         }
 
-        public void UpdateUser(AppUser user)
+        public void UpdateUser(User user)
         {
             throw new NotImplementedException();
         }

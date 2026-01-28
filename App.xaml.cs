@@ -6,7 +6,7 @@ namespace SignInWorkoutYavin
     public partial class App : Application
     {
         private Page _page;
-        public AppUser? CurrentUser { get; set; } = null;
+        public User? CurrentUser { get; set; } = null;
         public bool IsDebugMode { get; set; } = true;
         public App(SignInPage page)
         {
