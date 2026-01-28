@@ -1,6 +1,6 @@
-﻿using SignInWorkoutYavin.Helper;
-using SignInWorkoutYavin.Service;
-using SignInWorkoutYavin.Views;
+﻿using SingInWorkoutNoam.Helper;
+using SingInWorkoutNoam.Service;
+using SingInWorkoutNoam.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace SignInWorkoutYavin.ViewModels
+namespace SingInWorkoutNoam.ViewModels
 {
     public class SignInViewModel : ViewModelBase
     {
@@ -144,17 +144,14 @@ namespace SignInWorkoutYavin.ViewModels
             SignInMessageVisible = true;
             if (_db.IsExist(UserName, UserPassword))
             {
-                //Set current user
                 (App.Current as App)!.CurrentUser = _db.GetUserByEmail(UserName);
 
-                //Navigate to Main Page of Shell
                 var mainPage = IPlatformApplication.Current!.Services.GetService<AppShell>();
                 Application.Current!.Windows[0].Page = mainPage;
             }
             else
             {
                 LoginMessage = "user not exist";
-                //errorLbl.TextColor = Colors.Red;
             }
         }
     }

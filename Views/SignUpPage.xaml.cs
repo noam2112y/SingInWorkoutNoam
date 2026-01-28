@@ -1,10 +1,10 @@
 //using Android.Widget;
 //using Android.Widget;
 using CommunityToolkit.Maui.Core;
-using SignInWorkoutYavin.Helper;
+using SingInWorkoutNoam.Helper;
 using System.Windows.Input;
 
-namespace SignInWorkoutYavin.Views;
+namespace SingInWorkoutNoam.Views;
 
 public partial class SignUpPage : ContentPage
 {

@@ -1,17 +1,16 @@
-namespace SignInWorkoutYavin.ViewModels;
+namespace SingInWorkoutNoam.ViewModels;
 
-using SignInWorkoutYavin.Models;
-using SignInWorkoutYavin.Service;
+using SingInWorkoutNoam.Models;
+using SingInWorkoutNoam.Service;
 using System.Collections.ObjectModel;
 
 public class UsersListPageViewModel : ViewModelBase
 {
-    #region Fields
-    private string? _searchText; // Text entered in the search bar
-    private List<User> _allUsers = new(); // MUST be initialized
-    #endregion
+    private string? _searchText;
+    private List<User> _allUsers;
 
-    #region Properties
+    private ObservableUser? _selectedUser;
+
     public string? SearchText
     {
         get => _searchText;
@@ -21,93 +20,147 @@ public class UsersListPageViewModel : ViewModelBase
             {
                 _searchText = value;
                 OnPropertyChanged();
-                ClearFilterCommand?.ChangeCanExecute();
             }
         }
     }
 
-    public ObservableCollection<User> AllUsers { get; }
-    #endregion
+    public ObservableCollection<ObservableUser> AllUsers { get; }
 
-    #region Commands
+    public ObservableUser? SelectedUser
+    {
+        get => _selectedUser;
+        set
+        {
+            if (_selectedUser != value)
+            {
+                _selectedUser = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+
+    public Command GetAllUsersCommand { get; }
     public Command SearchCommand { get; }
     public Command ClearFilterCommand { get; }
-    public Command GetAllUsersCommand { get; }
     public Command DeleteUserCommand { get; }
-    #endregion
+    public Command ViewAccountPage { get; }
+
+    public Command SelectionChangedCommand { get; }
+
+    public Command AddUserCommand { get; }
 
     public UsersListPageViewModel()
     {
-        AllUsers = new ObservableCollection<User>();
-
-        DeleteUserCommand = new Command<User>(DeleteUser);
-        SearchCommand = new Command(OnSearch);
-        ClearFilterCommand = new Command(ClearFilter, () => string.IsNullOrEmpty(SearchText));
+        AllUsers = new ObservableCollection<ObservableUser>();
+        _allUsers = new List<User>();
 
         GetAllUsersCommand = new Command(GetAllUsers);
-    }
+        SearchCommand = new Command(OnSearch);
+        ClearFilterCommand = new Command(ClearFilter);
 
-    #region Methods
+        DeleteUserCommand = new Command<ObservableUser>(DeleteUser);
+        ViewAccountPage = new Command<ObservableUser>(GoToAccountPage);
+
+        SelectionChangedCommand = new Command(OnSelectionChanged);
+
+        AddUserCommand = new Command(AddUser);
+
+        GetAllUsers();
+    }
 
     private void GetAllUsers()
     {
-        if (IsBusy)
-            return;
+        _allUsers = new DBMokup().GetUsers();
 
-        try
+        AllUsers.Clear();
+
+        int i = 0;
+        while (i < _allUsers.Count)
         {
-            IsBusy = true;
-
-            _allUsers = new DBMokup().GetUsers();
-            AllUsers.Clear();
-
-            foreach (User user in _allUsers)
-            {
-                AllUsers.Add(user);
-            }
-        }
-        finally
-        {
-            IsBusy = false;
+            AllUsers.Add(new ObservableUser(_allUsers[i]));
+            i = i + 1;
         }
     }
 
-    private void DeleteUser(User user)
+    private void AddUser()
     {
-        if (user != null)
-        {
-            AllUsers.Remove(user);
-            _allUsers.Remove(user);
-        }
+        User u = new User();
+        u.FirstName = "New";
+        u.LastName = "User";
+        u.UEmail = "newuser@gmail.com";
+        u.UMobile = "0500000000";
+        u.RegDate = DateTime.Now;
+        u.IsAdmin = false;
+        u.UserPassword = "1234";
+
+        new DBMokup().AddUser(u);
+
+        GetAllUsers();
+    }
+
+    private void DeleteUser(ObservableUser obsUser)
+    {
+        if (obsUser == null) return;
+
+        new DBMokup().RemoveUser(obsUser.User);
+        GetAllUsers();
     }
 
     private void ClearFilter()
     {
         AllUsers.Clear();
 
-        foreach (User user in _allUsers)
+        int i = 0;
+        while (i < _allUsers.Count)
         {
-            AllUsers.Add(user);
+            AllUsers.Add(new ObservableUser(_allUsers[i]));
+            i = i + 1;
         }
     }
 
     private void OnSearch()
     {
-        if (string.IsNullOrWhiteSpace(SearchText))
+        if (SearchText == null || SearchText.Trim() == "")
             return;
 
-        var filteredUsers = _allUsers
-            .Where(u => u.FirstName.Contains(SearchText, StringComparison.OrdinalIgnoreCase)
-                     || u.LastName.Contains(SearchText, StringComparison.OrdinalIgnoreCase))
-            .ToList();
+        string s = SearchText.Trim().ToLower();
 
         AllUsers.Clear();
 
-        foreach (User user in filteredUsers)
+        int i = 0;
+        while (i < _allUsers.Count)
         {
-            AllUsers.Add(user);
+            string fn = (_allUsers[i].FirstName ?? "").ToLower();
+            string ln = (_allUsers[i].LastName ?? "").ToLower();
+
+            if (fn.Contains(s) || ln.Contains(s))
+            {
+                AllUsers.Add(new ObservableUser(_allUsers[i]));
+            }
+
+            i = i + 1;
         }
     }
 
-    #endregion
+    private async void GoToAccountPage(ObservableUser obsUser)
+    {
+        if (obsUser == null) return;
+
+        Dictionary<string, object> param = new Dictionary<string, object>();
+        param.Add("selectedUser", obsUser.User);
+
+        await Shell.Current.GoToAsync(nameof(SingInWorkoutNoam.Views.UserDetailsPage), param);
+    }
+
+    private async void OnSelectionChanged()
+    {
+        if (SelectedUser == null) return;
+
+        Dictionary<string, object> param = new Dictionary<string, object>();
+        param.Add("selectedUser", SelectedUser.User);
+
+        await Shell.Current.GoToAsync(nameof(SingInWorkoutNoam.Views.UserDetailsPage), param);
+
+        SelectedUser = null;
+    }
 }

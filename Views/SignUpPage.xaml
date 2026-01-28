@@ -2,9 +2,9 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:views="clr-namespace:SignInWorkoutYavin.Views"
+             xmlns:views="clr-namespace:SingInWorkoutNoam.Views"
              x:DataType="views:SignUpPage"
-             x:Class="SignInWorkoutYavin.Views.SignUpPage"
+             x:Class="SingInWorkoutNoam.Views.SignUpPage"
              Title="SignUpPage">
     <ContentPage.Resources>
         <Style x:Key="InvalidEntryStyle" TargetType="Entry">
@@ -25,7 +25,6 @@
         RowDefinitions="*,4*,*"
         ColumnDefinitions="*,8*,*">
 
-        <!-- כותרת -->
         <HorizontalStackLayout Grid.Column="1"
                         HorizontalOptions="Center"
                         VerticalOptions="Center">
@@ -37,7 +36,6 @@
         <VerticalStackLayout Grid.Row="1"
                       Grid.Column="1">
 
-            <!-- שדה שם פרטי -->
             <Border Margin="0,0,0,10"
              Padding="10"
              Stroke="#ccc"
@@ -49,7 +47,6 @@
                 TextColor="Wheat"/>
             </Border>
 
-            <!-- שדה שם משפחה -->
             <Border Margin="0,0,0,10"
              Padding="10"
              Stroke="#ccc"
@@ -61,7 +58,6 @@
                 TextColor="Wheat"/>
             </Border>
 
-            <!-- שדה דואל -->
             <Border Margin="0,0,0,10"
              Padding="10"
              Stroke="#ccc"
@@ -82,7 +78,6 @@
             </Border>
 
 
-            <!-- שדה סיסמה -->
             <Border Margin="0,0,0,10"
              Stroke="#ccc"
              StrokeShape="RoundRectangle 8"
@@ -112,7 +107,6 @@
                 </Grid>
             </Border>
 
-            <!-- שדה מספר נייד -->
             <Border Margin="0,0,0,10"
              Padding="10"
              Stroke="#ccc"
@@ -125,7 +119,6 @@
                 TextColor="Wheat"/>
             </Border>
 
-            <!-- כפתור הרשמה -->
             <Button CornerRadius="8"
              FontSize="20"
              HeightRequest="70"
@@ -133,7 +126,6 @@
              TextColor="White"
              Command="{Binding SignInCommand}"/>
 
-            <!-- Already have an account? -->
             <HorizontalStackLayout HorizontalOptions="Center"
                             VerticalOptions="Center">
                 <Label Margin="14,0,0,0"

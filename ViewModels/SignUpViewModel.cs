@@ -1,6 +1,6 @@
 ﻿using CommunityToolkit.Maui.Alerts;
 using CommunityToolkit.Maui.Core;
-using SignInWorkoutYavin.Helper;
+using SingInWorkoutNoam.Helper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace SignInWorkoutYavin.ViewModels
+namespace SingInWorkoutNoam.ViewModels
 {
     public class SignUpViewModel : ViewModelBase
     {

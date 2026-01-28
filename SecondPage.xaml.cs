@@ -1,4 +1,4 @@
-namespace SignInWorkoutYavin;
+namespace SingInWorkoutNoam;
 
 public partial class SecondPage : ContentPage
 {

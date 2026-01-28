@@ -1,9 +1,9 @@
-using SignInWorkoutYavin.Helper;
-using SignInWorkoutYavin.Service;
-using SignInWorkoutYavin.ViewModels;
+using SingInWorkoutNoam.Helper;
+using SingInWorkoutNoam.Service;
+using SingInWorkoutNoam.ViewModels;
 using static System.Net.Mime.MediaTypeNames;
 
-namespace SignInWorkoutYavin.Views;
+namespace SingInWorkoutNoam.Views;
 
 public partial class SignInPage : ContentPage
 {

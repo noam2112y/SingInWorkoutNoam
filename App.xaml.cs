@@ -1,7 +1,7 @@
-﻿using SignInWorkoutYavin.Models;
-using SignInWorkoutYavin.Views;
+﻿using SingInWorkoutNoam.Models;
+using SingInWorkoutNoam.Views;
 
-namespace SignInWorkoutYavin
+namespace SingInWorkoutNoam
 {
     public partial class App : Application
     {

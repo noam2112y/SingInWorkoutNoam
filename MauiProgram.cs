@@ -1,9 +1,9 @@
 ﻿using CommunityToolkit.Maui;
 using Microsoft.Extensions.Logging;
-using SignInWorkoutYavin.Service;
-using SignInWorkoutYavin.ViewModels;
+using SingInWorkoutNoam.Service;
+using SingInWorkoutNoam.ViewModels;
 
-namespace SignInWorkoutYavin
+namespace SingInWorkoutNoam
 {
     public static class MauiProgram
     {
@@ -43,7 +43,7 @@ namespace SignInWorkoutYavin
 
         public static MauiAppBuilder RegisterViewModels(this MauiAppBuilder builder)
         {
-            builder.Services.AddTransient<SignInWorkoutYavin.ViewModels.SignInViewModel>();
+            builder.Services.AddTransient<SingInWorkoutNoam.ViewModels.SignInViewModel>();
             builder.Services.AddSingleton<AppShellViewModel>();
             return builder;
         }

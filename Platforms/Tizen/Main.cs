@@ -2,7 +2,7 @@ using System;
 using Microsoft.Maui;
 using Microsoft.Maui.Hosting;
 
-namespace SignInWorkoutYavin
+namespace SingInWorkoutNoam
 {
     internal class Program : MauiApplication
     {

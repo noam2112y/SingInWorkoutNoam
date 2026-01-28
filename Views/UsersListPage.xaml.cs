@@ -1,27 +1,29 @@
-namespace SignInWorkoutYavin.Views;
+﻿using SingInWorkoutNoam.Service;
+using SingInWorkoutNoam.ViewModels;
 
-using SignInWorkoutYavin.Models;
-using SignInWorkoutYavin.ViewModels;
+namespace SingInWorkoutNoam.Views;
+
 public partial class UsersListPage : ContentPage
 {
-    public Command? DeleteUserCommand { get; }
     public UsersListPage()
     {
         InitializeComponent();
         BindingContext = new UsersListPageViewModel();
     }
-       
-    
-    protected override void OnAppearing()
+
+    protected override async void OnAppearing()
     {
         base.OnAppearing();
-        // Optionally, you can call a method to load data when the page appears
+
+        if (!AppState.IsAdminLoggedIn)
+        {
+            await Shell.Current.GoToAsync(nameof(AdminLoginPage));
+            return;
+        }
+
         if (BindingContext is UsersListPageViewModel viewModel)
         {
-
-            viewModel.GetAllUsersCommand?.Execute(null);
-
+            viewModel.GetAllUsersCommand.Execute(null);
         }
     }
-
 }

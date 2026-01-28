@@ -1,4 +1,4 @@
-namespace SignInWorkoutYavin.Views;
+namespace SingInWorkoutNoam.Views;
 
 public partial class MainPage : ContentPage
 {

@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:viewmodels="clr-namespace:SignInWorkoutYavin.ViewModels"
-             xmlns:models="clr-namespace:SignInWorkoutYavin.Models"
+             xmlns:viewmodels="clr-namespace:SingInWorkoutNoam.ViewModels"
+             xmlns:models="clr-namespace:SingInWorkoutNoam.Models"
              x:DataType="viewmodels:UsersListPageViewModel"
-             x:Class="SignInWorkoutYavin.Views.UsersListPage"
+             x:Class="SingInWorkoutNoam.Views.UsersListPage"
              Title="UsersListPage">
 
     <Grid RowDefinitions=".13*,.13*,.9*">
 
-        <!-- Title + Add -->
         <Grid ColumnDefinitions="7*,3*">
             <Label HorizontalOptions="Center"
                    VerticalOptions="Center"
@@ -25,10 +24,10 @@
                     Background="Green"
                     TextColor="White"
                     Text="Add"
-                    FontSize="20"/>
+                    FontSize="20"
+                    Command="{Binding AddUserCommand}" />
         </Grid>
 
-        <!-- Find + Filter -->
         <Grid Grid.Row="1" ColumnDefinitions="7*,3*">
             <SearchBar Placeholder="find user"
                        Text="{Binding SearchText}" />
@@ -39,16 +38,16 @@
                     ImageSource="filteroff.png"/>
         </Grid>
 
-        <!-- Refresh + Users Collection -->
         <RefreshView Grid.Row="2"
                      Command="{Binding GetAllUsersCommand}"
                      IsRefreshing="{Binding IsBusy}">
 
             <CollectionView x:Name="UsersCollection"
-                            SelectionMode="None"
+                            SelectionMode="Single"
+                            SelectedItem="{Binding SelectedUser, Mode=TwoWay}"
+                            SelectionChangedCommand="{Binding SelectionChangedCommand}"
                             ItemsSource="{Binding AllUsers}">
 
-                <!-- Header -->
                 <CollectionView.Header>
                     <HorizontalStackLayout>
                         <Label HorizontalTextAlignment="Center"
@@ -65,7 +64,6 @@
                     </HorizontalStackLayout>
                 </CollectionView.Header>
 
-                <!-- Footer -->
                 <CollectionView.Footer>
                     <HorizontalStackLayout>
                         <Label HorizontalTextAlignment="Center"
@@ -82,7 +80,6 @@
                     </HorizontalStackLayout>
                 </CollectionView.Footer>
 
-                <!-- Empty View -->
                 <CollectionView.EmptyView>
                     <StackLayout Padding="20"
                                  HorizontalOptions="Center"
@@ -99,17 +96,15 @@
                     </StackLayout>
                 </CollectionView.EmptyView>
 
-                <!-- Item Template + Swipe -->
                 <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="models:User">
-
+                    <DataTemplate x:DataType="models:ObservableUser">
                         <SwipeView>
 
                             <SwipeView.LeftItems>
                                 <SwipeItems Mode="Execute">
                                     <SwipeItem Text="צפייה"
                                                IconImageSource="account.png"
-                                               Command="{Binding BindingContext.ViewAccountPageCommand, Source={x:Reference UsersCollection}}"
+                                               Command="{Binding BindingContext.ViewAccountPage, Source={x:Reference UsersCollection}}"
                                                CommandParameter="{Binding .}" />
                                 </SwipeItems>
                             </SwipeView.LeftItems>
@@ -128,18 +123,18 @@
                                 </SwipeItems>
                             </SwipeView.RightItems>
 
-                            <!-- Card -->
                             <Border Margin="15,7"
                                     Padding="15"
                                     Background="White"
                                     Stroke="LightGray"
                                     StrokeShape="RoundRectangle 10">
 
-                                <Grid ColumnDefinitions="*,Auto"
+                                <Grid ColumnDefinitions="*,Auto,Auto"
                                       RowDefinitions="Auto,Auto"
-                                      RowSpacing="5">
+                                      RowSpacing="5"
+                                      ColumnSpacing="10">
 
-                                    <HorizontalStackLayout>
+                                    <HorizontalStackLayout Grid.Column="0">
                                         <Label FontAttributes="Bold"
                                                FontSize="16"
                                                Text="{Binding FirstName}"
@@ -152,14 +147,18 @@
                                                VerticalOptions="Center"/>
                                     </HorizontalStackLayout>
 
-                                    <Label Grid.Row="1"
-                                           FontSize="13"
-                                           Text="{Binding UEmail}"
-                                           TextColor="Gray"
-                                           VerticalOptions="Center"/>
+                                    <Button Grid.Column="1"
+                                            Grid.RowSpan="2"
+                                            Text="Delete"
+                                            BackgroundColor="Red"
+                                            TextColor="White"
+                                            Padding="10,6"
+                                            Command="{Binding BindingContext.DeleteUserCommand, Source={x:Reference UsersCollection}}"
+                                            CommandParameter="{Binding .}"
+                                            VerticalOptions="Center" />
 
                                     <Border Grid.RowSpan="2"
-                                            Grid.Column="1"
+                                            Grid.Column="2"
                                             Padding="10,5"
                                             BackgroundColor="{AppThemeBinding Light=LightGray, Dark=#333333}"
                                             StrokeShape="RoundRectangle 15"
@@ -171,16 +170,20 @@
                                                VerticalOptions="Center"/>
                                     </Border>
 
+                                    <Label Grid.Row="1"
+                                           Grid.Column="0"
+                                           FontSize="13"
+                                           Text="{Binding UEmail}"
+                                           TextColor="Gray"
+                                           VerticalOptions="Center"/>
+
                                 </Grid>
                             </Border>
-
                         </SwipeView>
-
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
 
             </CollectionView>
         </RefreshView>
-
     </Grid>
 </ContentPage>

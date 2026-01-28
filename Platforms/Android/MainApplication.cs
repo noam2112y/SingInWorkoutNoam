@@ -1,7 +1,7 @@
 ﻿using Android.App;
 using Android.Runtime;
 
-namespace SignInWorkoutYavin
+namespace SingInWorkoutNoam
 {
     [Application]
     public class MainApplication : MauiApplication

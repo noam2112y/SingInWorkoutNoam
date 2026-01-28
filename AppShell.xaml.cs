@@ -1,6 +1,7 @@
-﻿using SignInWorkoutYavin.ViewModels;
+﻿using SingInWorkoutNoam.ViewModels;
+using SingInWorkoutNoam.Views;
 
-namespace SignInWorkoutYavin
+namespace SingInWorkoutNoam
 {
     public partial class AppShell : Shell
     {
@@ -9,8 +10,9 @@ namespace SignInWorkoutYavin
             InitializeComponent();
             BindingContext = vm;
 
-            Routing.RegisterRoute(nameof(FirstPage), typeof(FirstPage));
-            Routing.RegisterRoute(nameof(SecondPage), typeof(SecondPage));
+            Routing.RegisterRoute(nameof(UsersListPage), typeof(UsersListPage));
+            Routing.RegisterRoute(nameof(UserDetailsPage), typeof(UserDetailsPage));
+            Routing.RegisterRoute(nameof(AdminLoginPage), typeof(AdminLoginPage)); 
         }
     }
 }

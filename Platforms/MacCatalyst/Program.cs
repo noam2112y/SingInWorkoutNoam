@@ -1,7 +1,7 @@
 ﻿using ObjCRuntime;
 using UIKit;
 
-namespace SignInWorkoutYavin
+namespace SingInWorkoutNoam
 {
     public class Program
     {

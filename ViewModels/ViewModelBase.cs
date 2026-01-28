@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SignInWorkoutYavin.ViewModels
+namespace SingInWorkoutNoam.ViewModels
 {
     public class ViewModelBase : INotifyPropertyChanged
     {

@@ -1,6 +1,6 @@
 ﻿using Foundation;
 
-namespace SignInWorkoutYavin
+namespace SingInWorkoutNoam
 {
     [Register("AppDelegate")]
     public class AppDelegate : MauiUIApplicationDelegate

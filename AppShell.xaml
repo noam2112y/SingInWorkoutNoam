@@ -1,89 +1,39 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Shell
-    x:Class="SignInWorkoutYavin.AppShell"
+    x:Class="SingInWorkoutNoam.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:SignInWorkoutYavin.Views"
+    xmlns:local="clr-namespace:SingInWorkoutNoam.Views"
     Title="MyNavigation">
 
     <Shell.TitleView>
         <HorizontalStackLayout>
             <Button
-            Margin="5"
-            BackgroundColor="Wheat"
-            Command="{Binding LogoutCommand}"
-            FontSize="24"
-            FontFamily="MaterialIcons"
-            TextColor="Black"
-            Text="&#xe9ba;"
-            HorizontalOptions="Start" />
+                Margin="5"
+                BackgroundColor="Wheat"
+                Command="{Binding LogoutCommand}"
+                FontSize="24"
+                FontFamily="MaterialIcons"
+                TextColor="Black"
+                Text="&#xe9ba;"
+                HorizontalOptions="Start" />
 
-            <!-- IsAdmin Option -->
             <Button
-            Margin="0,5,5,5"
-            BackgroundColor="Wheat"
-            FontSize="24"
-            FontFamily="MaterialIcons"
-            TextColor="Black"
-            Text="&#xf02e;"
-            HorizontalOptions="Start"
-            IsVisible="{Binding IsAdmin}" />
+                Margin="0,5,5,5"
+                BackgroundColor="Wheat"
+                Command="{Binding AdminLoginCommand}"
+                FontSize="24"
+                FontFamily="MaterialIcons"
+                TextColor="Black"
+                Text="&#xf02e;"
+                HorizontalOptions="Start"
+                IsVisible="True" />
         </HorizontalStackLayout>
     </Shell.TitleView>
 
     <ShellContent
-    Title="Home"
-    ContentTemplate="{DataTemplate local:MainPage}"
-    Route="MainPage" />
-
-    <!--<ShellContent
         Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />-->
-
-    <!--footer menu-->
-    <!--<FlyoutItem>
-        <ShellContent
-        Title="Home"
-        Icon="home.png"
         ContentTemplate="{DataTemplate local:MainPage}"
         Route="MainPage" />
-
-        <ShellContent
-        Title="דף ראשון"
-        Icon="clear_day.png"
-        ContentTemplate="{DataTemplate local:FirstPage}"
-        Route="FirstPage" />
-
-        <ShellContent
-        Title="דף שני"
-        Icon="outdoor_garden.png"
-        ContentTemplate="{DataTemplate local:SecondPage}"
-        Route="SecondPage" />
-    </FlyoutItem>
-    
-    -->
-    <!--תפריט צידי-->
-    <!--
-    <FlyoutItem Title="Home" Icon="home.png">
-    <ShellContent
-    Title="Home"
-    ContentTemplate="{DataTemplate local:MainPage}"
-    Route="MainPage" />
-</FlyoutItem>
-
-<FlyoutItem Title="דף ראשון" Icon="clear_day.png">
-    <ShellContent
-    Title="דף ראשון"
-    ContentTemplate="{DataTemplate local:FirstPage}"
-    Route="FirstPage" />
-</FlyoutItem>
-
-<FlyoutItem Title="דף שני" Icon="outdoor_garden.png">
-    <ShellContent
-    Title="דף שני"
-    ContentTemplate="{DataTemplate local:SecondPage}"
-    Route="SecondPage" />
-</FlyoutItem>-->
 
 </Shell>
