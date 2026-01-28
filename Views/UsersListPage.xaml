@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:SignInWorkoutYavin.Models"
+             xmlns:viewmodels="clr-namespace:SignInWorkoutYavin.ViewModels"
+             x:DataType="viewmodels:UsersListPageViewModel"
+             x:Class="SignInWorkoutYavin.Views.UsersListPage"
+             Title="UsersListPage">
+
+    <Grid RowDefinitions=".13*,.13*,.9*">
+
+        <Grid ColumnDefinitions="7*,3*">
+            <Label HorizontalOptions="Center"
+                   VerticalOptions="Center"
+                   Margin="80,0,0,0"
+                   TextColor="CadetBlue"
+                   FontAttributes="Bold"
+                   Text="Users List"
+                   FontSize="30"/>
+
+            <Button Grid.Column="1"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"
+                    Background="Green"
+                    TextColor="White"
+                    Text="Add"
+                    FontSize="20"/>
+        </Grid>
+
+        <!-- Find && Filter Users -->
+        <Grid Grid.Row="1" ColumnDefinitions="7*,3*">
+            <SearchBar Placeholder="find user"/>
+
+            <Button Grid.Column="1"
+                    Margin="0,0,0,15"
+                    Background="Transparent"
+                    ImageSource="filteroff.png"/>
+        </Grid>
+
+        <!-- Users Collection -->
+        <CollectionView Grid.Row="2"
+                        SelectionMode="None">
+            <!-- ItemsSource="{Binding Users}" -->
+
+            <!-- מה מציגים כאשר אין משתמשים -->
+            <CollectionView.EmptyView>
+                <StackLayout Padding="20"
+                             HorizontalOptions="Center"
+                             VerticalOptions="Center">
+                    <Label HorizontalTextAlignment="Center"
+                           TextColor="Gray"
+                           Text="Users not found!"
+                           FontSize="24" />
+
+                    <Label HorizontalTextAlignment="Center"
+                           TextColor="Gray"
+                           Text="Pull down to refresh"
+                           FontSize="24"
+                           Margin="0,0,0,100"/>
+                </StackLayout>
+            </CollectionView.EmptyView>
+        </CollectionView>
+
+    </Grid>
+</ContentPage>
